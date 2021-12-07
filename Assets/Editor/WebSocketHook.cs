@@ -45,7 +45,8 @@ public class WebSocketHook : IDisposable
         UpdateDefinitions("");
 
         server = new WebSocketServer("ws://127.0.0.1:" + port + "");
-        server.AddWebSocketService<WSS>("/ws", () => { return new WSS() { hook = this }; });
+        //server.AddWebSocketService<WSS>("/ws", () => { return new WSS() { hook = this }; });
+        server.AddWebSocketService("/ws", (WSS wss) => { wss.hook = this; });
         server.Start();
     }
 
